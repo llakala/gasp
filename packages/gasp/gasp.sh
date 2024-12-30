@@ -1,3 +1,5 @@
+shopt -s inherit_errexit
+
 DIRECTORY="/etc/nixos" # Git directory we're operating on
 TMPDIR=$(mktemp -d)
 ORIGINAL="original.patch" # Unsplit patch with all the hunks together
