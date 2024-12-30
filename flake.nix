@@ -6,14 +6,24 @@
       lib.genAttrs lib.systems.flakeExposed
       (system: function nixpkgs.legacyPackages.${system});
 
+    selfPackagesFromDirectoryRecursive = { directory, pkgs }:
+    lib.makeScope pkgs.newScope
+    (
+      self: lib.packagesFromDirectoryRecursive
+      {
+        inherit (self) callPackage;
+        inherit directory;
+      }
+    );
+
   in
   {
     packages = forAllSystems
     (
-      pkgs:
+      pkgs: selfPackagesFromDirectoryRecursive
       {
-        splitpatch = pkgs.callPackage ./packages/splitpatch.nix { inherit self; };
-        gasp = pkgs.callPackage ./packages/gasp.nix { inherit self; };
+        inherit pkgs;
+        directory = ./packages;
       }
     );
 

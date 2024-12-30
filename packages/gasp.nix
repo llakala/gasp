@@ -1,4 +1,4 @@
-{ pkgs, self, ... }:
+{ pkgs, splitpatch, ... }:
 
 let
   pkgsInputs = with pkgs;
@@ -7,7 +7,7 @@ let
     fzf
   ];
 
-  selfInputs = with self.packages.${pkgs.system}; # Other custom packages
+  selfInputs = # Custom packages
   [
     splitpatch
   ];
