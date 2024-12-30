@@ -1,10 +1,16 @@
 shopt -s inherit_errexit
 
-DIRECTORY="/etc/nixos" # Git directory we're operating on
-TMPDIR=$(mktemp -d)
+DIRECTORY="/etc/nixos"    # Git directory we're operating on
 ORIGINAL="original.patch" # Unsplit patch with all the hunks together
 BAD_PATTERN="diff --git"  # `splitpatch` has a bug that adds bad output to the end of each hunk
+TMPDIR=$(mktemp -d)
 
+cleanup_state()
+{
+  rm -rf "$TMPDIR"
+}
+
+trap cleanup_state EXIT # Delete TMPDIR on exit, even if user exits early
 cd "$TMPDIR"
 
 git -C "$DIRECTORY" diff >"$ORIGINAL" # Uses `git diff` for unstaged changes
@@ -28,5 +34,3 @@ for patch in $applied_patches; do
   # Read the patch content and apply it directly via stdin
   git apply --cached <"$TMPDIR/$patch"
 done
-
-rm -rf "$TMPDIR"
