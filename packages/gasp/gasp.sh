@@ -13,7 +13,7 @@ rm "$ORIGINAL" # So we can iterate over each hunk individually
 for file in *.patch; do
 
   # Check last two lines for bad pattern
-  if tail -n 2 "$file" | rg -q "$BAD_PATTERN" "$file"; then
+  if tail -n 2 "$file" | rg -q "$BAD_PATTERN"; then
     head -n -2 "$file" >tmpfile && mv tmpfile "$file"
   fi
 
