@@ -19,12 +19,12 @@ for file in *.patch; do
 
 done
 
-selected_patch=$(fzf --preview-window="top" --preview="cat {} | diff-so-fancy")
+applied_patches=$(fzf -m --preview-window="top" --preview="cat {} | diff-so-fancy")
 
 cd "$DIRECTORY"
-if [ -n "$selected_patch" ]; then
+for patch in $applied_patches; do
   # Read the patch content and apply it directly via stdin
-  git apply --cached <"$TMPDIR/$selected_patch"
-fi
+  git apply --cached <"$TMPDIR/$patch"
+done
 
 rm -rf "$TMPDIR"
