@@ -2,7 +2,6 @@ shopt -s inherit_errexit
 
 DIRECTORY="/etc/nixos"    # Git directory we're operating on
 ORIGINAL="original.patch" # Unsplit patch with all the hunks together
-BAD_PATTERN="diff --git"  # `splitpatch` has a bug that adds bad output to the end of each hunk
 TMPDIR=$(mktemp -d)
 
 cleanup_state()
@@ -16,16 +15,7 @@ cd "$TMPDIR"
 git -C "$DIRECTORY" diff >"$ORIGINAL" # Uses `git diff` for unstaged changes
 splitpatch -H "$ORIGINAL"             # Split up patch into individual hunks
 
-rm "$ORIGINAL" # So we can iterate over each hunk individually
-
-for file in *.patch; do
-
-  # Check last two lines for bad pattern
-  if tail -n 2 "$file" | rg -q "$BAD_PATTERN"; then
-    head -n -2 "$file" >tmpfile && mv tmpfile "$file"
-  fi
-
-done
+rm "$ORIGINAL" # Don't need it anymore now that the hunks are split up
 
 applied_patches=$(fzf -m --preview-window="top" --preview="cat {} | diff-so-fancy")
 
