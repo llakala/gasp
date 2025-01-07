@@ -14,7 +14,7 @@ let
 
 in pkgs.writeShellApplication
 {
-  name = "gasp"; # `Git Add Specific Patch`
+  name = "hip"; # `Hunks In Patch`
 
   runtimeInputs = pkgsInputs ++ selfInputs;
 
@@ -26,5 +26,5 @@ in pkgs.writeShellApplication
     "errtrace" # -E
   ];
 
-  text = builtins.readFile ./gasp.sh;
+  text = builtins.readFile ./hip.sh;
 }

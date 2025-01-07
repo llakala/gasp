@@ -35,8 +35,9 @@
         {
           packages = with self.packages.${pkgs.system};
           [
-            gasp
+            gaap
             splitpatch
+            hip # For testing and QOL with running scripts
           ];
         };
       }
