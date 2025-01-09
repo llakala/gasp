@@ -14,7 +14,7 @@ let
 
 in pkgs.writeShellApplication
 {
-  name = "guap"; # `Git Unstage A Patch`
+  name = "gfp"; # `Git Fire Patch`
 
   runtimeInputs = pkgsInputs ++ selfInputs;
 
@@ -26,5 +26,5 @@ in pkgs.writeShellApplication
     "errtrace" # -E
   ];
 
-  text = builtins.readFile ./guap.sh;
+  text = builtins.readFile ./gfp.sh;
 }

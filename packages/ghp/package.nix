@@ -14,7 +14,7 @@ let
 
 in pkgs.writeShellApplication
 {
-  name = "gsap"; # `Git Stage A Patch`
+  name = "ghp"; # `Git Hire Patch`
 
   runtimeInputs = pkgsInputs ++ selfInputs;
 
@@ -26,5 +26,5 @@ in pkgs.writeShellApplication
     "errtrace" # -E
   ];
 
-  text = builtins.readFile ./gsap.sh;
+  text = builtins.readFile ./ghp.sh;
 }

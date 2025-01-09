@@ -35,9 +35,9 @@
         {
           packages = with self.packages.${pkgs.system};
           [
-            gsap # Git Stage A Patch
-            guap # Git Unstage A Patch
-            gcap # Git Clean A Patch
+            ghp # Git Hire Patch
+            gfp # Git Fire Patch
+            gkp # Git Kill Patch
             splitpatch
             hip # For testing and QOL with running scripts
           ];

@@ -14,7 +14,7 @@ let
 
 in pkgs.writeShellApplication
 {
-  name = "gcap"; # `Git Clean A Patch`
+  name = "gkp"; # `Git Kill Patch`
 
   runtimeInputs = pkgsInputs ++ selfInputs;
 
@@ -26,5 +26,5 @@ in pkgs.writeShellApplication
     "errtrace" # -E
   ];
 
-  text = builtins.readFile ./gcap.sh;
+  text = builtins.readFile ./gkp.sh;
 }
