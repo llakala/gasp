@@ -6,7 +6,7 @@ cleanup_state()
 }
 
 DIRECTORY="/etc/nixos"
-diff=$(git -C "$DIRECTORY" diff)
+diff=$(git -C "$DIRECTORY" diff --staged -R) # Currently staged changes, with -R so we can unstage them
 
 # Internal dependency from nix package inputs, split patch into hunks within $TMPDIR
 TMPDIR=$(hip "$diff")
@@ -18,8 +18,7 @@ applied_patches=$(fzf -m --preview-window="top" --preview="cat {} | diff-so-fanc
 
 cd "$DIRECTORY"
 for patch in $applied_patches; do
-  # Read the patch content and apply it directly via stdin
-  git apply --cached <"$TMPDIR/$patch"
+  git apply --cached <"$TMPDIR/$patch" # Unstage the given patch thanks to -R in the `git diff` command
 done
 
 # $TMPDIR is cleaned up here automatically
