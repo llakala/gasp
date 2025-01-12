@@ -9,8 +9,8 @@ stdenv.mkDerivation
   {
     owner = "jaalto";
     repo = "splitpatch";
-    rev = "e9203c23c7d37777d0fb751b872f86e24244b1da"; # Pointing to my own PR
-    hash = "sha256-hnA3VGyEB9423FR7Um5oP51nvROpFOLKsytq2BcrcOk=";
+    rev = "256cb7b5beab2234395096617593d63025f443e0"; # Pointing to my own PR
+    hash = "sha256-Li4vjov+w7S7uxrGYRrRq7+p4LqM9Bhk6HVx4MBFMzI=";
   };
 
   buildInputs = with pkgs;
