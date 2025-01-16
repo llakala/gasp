@@ -1,4 +1,4 @@
-{ pkgs, splitpatch, writeShellApplication, ... }:
+{ pkgs, splitpatch, llakaLib, ... }:
 
 let
   pkgsInputs = with pkgs;
@@ -12,19 +12,11 @@ let
     splitpatch
   ];
 
-in writeShellApplication
+in llakaLib.writeFishApplication
 {
   name = "hip"; # `Hunks In Patch`
 
   runtimeInputs = pkgsInputs ++ selfInputs;
 
-  bashOptions =
-  [
-    "nounset" # -u
-    "errexit" # -e
-    "pipefail"
-    "errtrace" # -E
-  ];
-
-  text = builtins.readFile ./hip.sh;
+  text = builtins.readFile ./hip.fish;
 }
