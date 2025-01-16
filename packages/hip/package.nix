@@ -1,22 +1,13 @@
-{ pkgs, splitpatch, llakaLib, ... }:
+{ splitpatch, llakaLib, ... }:
 
-let
-  pkgsInputs = with pkgs;
-  [
-    git
-    fzf
-  ];
-
-  selfInputs = # Collected packages defined within repo
-  [
-    splitpatch
-  ];
-
-in llakaLib.writeFishApplication
+llakaLib.writeFishApplication
 {
   name = "hip"; # `Hunks In Patch`
 
-  runtimeInputs = pkgsInputs ++ selfInputs;
+  runtimeInputs =
+  [
+    splitpatch # Collected packages defined within repo
+  ];
 
   text = builtins.readFile ./hip.fish;
 }
