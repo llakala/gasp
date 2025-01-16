@@ -1,33 +1,27 @@
 {
-  outputs = { self, nixpkgs }:
-  let
-    lib = nixpkgs.lib;
-    forAllSystems = function:
-      lib.genAttrs lib.systems.flakeExposed
-      (system: function nixpkgs.legacyPackages.${system});
+  inputs.myLib =
+  {
+    url = "github:llakala/llakaLib";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
-    selfPackagesFromDirectoryRecursive = { directory, pkgs }:
-    lib.makeScope pkgs.newScope
-    (
-      self: lib.packagesFromDirectoryRecursive
-      {
-        inherit (self) callPackage;
-        inherit directory;
-      }
-    );
+  outputs = { self, nixpkgs, ... } @ inputs:
+  let
+    # My custom lib functions, declared in another repo so I can use them across projects
+    myLib = inputs.myLib.lib;
 
   in
   {
-    packages = forAllSystems
+    packages = myLib.forAllSystems
     (
-      pkgs: selfPackagesFromDirectoryRecursive
+      pkgs: myLib.collectDirectoryPackages
       {
         inherit pkgs;
         directory = ./packages;
       }
     );
 
-    devShells = forAllSystems
+    devShells = myLib.forAllSystems
     (
       pkgs:
       {
