@@ -7,11 +7,12 @@ function cleanup_state
 end
 
 # Currently unstaged changes
-# We do "$()" anywhere this is used, to not split into a list on newlines
+# We do "$()" to not split into a list on newlines
 set diff "$(git -C $DIRECTORY diff)"
 
-# Internal dependency from nix package inputs, split patch into hunks within $TMPDIR
-set TMPDIR "$(hip "$diff")"
+# Internal dependency from nix package inputs
+# Splits patch into hunks within $TMPDIR
+set TMPDIR (hip $diff)
 
 # Delete TMPDIR on exit, even if user exits early
 trap cleanup_state EXIT
@@ -21,7 +22,8 @@ set applied_patches (fzf -m --preview-window="top" --preview="cat {} | diff-so-f
 
 cd $DIRECTORY
 for patch in $applied_patches
-    cat "$TMPDIR/$patch" | git apply --cached - # Stage changes
+    # Stage the given hunk, Using `-` to read from stdin
+    cat "$TMPDIR/$patch" | git apply --cached -
 end
 
 # $TMPDIR is cleaned up here automatically
