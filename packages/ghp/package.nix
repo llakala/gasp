@@ -1,4 +1,4 @@
-{ pkgs, hip, ... }:
+{ pkgs, hip, writeShellApplication, ... }:
 
 let
   pkgsInputs = with pkgs;
@@ -7,12 +7,12 @@ let
     fzf
   ];
 
-  selfInputs = # Custom packages
+  selfInputs =
   [
     hip
   ];
 
-in pkgs.writeShellApplication
+in writeShellApplication
 {
   name = "ghp"; # `Git Hire Patch`
 

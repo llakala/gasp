@@ -1,4 +1,4 @@
-{ pkgs, splitpatch, ... }:
+{ pkgs, splitpatch, writeShellApplication, ... }:
 
 let
   pkgsInputs = with pkgs;
@@ -7,12 +7,12 @@ let
     fzf
   ];
 
-  selfInputs = # Custom packages
+  selfInputs = # Collected packages defined within repo
   [
     splitpatch
   ];
 
-in pkgs.writeShellApplication
+in writeShellApplication
 {
   name = "hip"; # `Hunks In Patch`
 

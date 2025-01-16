@@ -1,4 +1,4 @@
-{ pkgs, hip, ... }:
+{ pkgs, hip, writeShellApplication, ... }:
 
 let
   pkgsInputs = with pkgs;
@@ -12,7 +12,7 @@ let
     hip
   ];
 
-in pkgs.writeShellApplication
+in writeShellApplication
 {
   name = "gfp"; # `Git Fire Patch`
 
