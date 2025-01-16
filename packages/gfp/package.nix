@@ -1,10 +1,11 @@
-{ pkgs, hip, writeShellApplication, ... }:
+{ pkgs, hip, llakaLib, ... }:
 
 let
   pkgsInputs = with pkgs;
   [
     git
     fzf
+    diff-so-fancy
   ];
 
   selfInputs = # Custom packages
@@ -12,19 +13,11 @@ let
     hip
   ];
 
-in writeShellApplication
+in llakaLib.writeFishApplication
 {
   name = "gfp"; # `Git Fire Patch`
 
   runtimeInputs = pkgsInputs ++ selfInputs;
 
-  bashOptions =
-  [
-    "nounset" # -u
-    "errexit" # -e
-    "pipefail"
-    "errtrace" # -E
-  ];
-
-  text = builtins.readFile ./gfp.sh;
+  text = builtins.readFile ./gfp.fish;
 }
