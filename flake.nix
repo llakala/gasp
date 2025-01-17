@@ -7,21 +7,36 @@
 
   outputs = { self, nixpkgs, ... } @ inputs:
   let
-    # My custom lib functions, declared in another repo so I can use them across projects
-    llakaLib = inputs.llakaLib.lib;
+    lib = nixpkgs.lib;
 
+    # The "normal" systems. If it ever doesn't work with one of these, or you want me
+    # to add a system, let me know!
+    supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64_linux" "aarch64-darwin" ];
+
+    forAllSystems = function: lib.genAttrs
+      supportedSystems
+      (system: function nixpkgs.legacyPackages.${system});
+
+    # My custom lib functions, declared in another repo so I can use them across projects
+    # Some of them require `pkgs`, so this function gives you a `llakaLib` instance from
+    # `fullLib`, which includes system-dependent functions.
+    mkLlakaLib = system: inputs.llakaLib.fullLib.${system};
   in
   {
-    packages = llakaLib.forAllSystems
+    packages = forAllSystems
     (
-      pkgs: llakaLib.collectDirectoryPackages
+      pkgs: let llakaLib = mkLlakaLib pkgs.system;
+      in
+        llakaLib.collectDirectoryPackages
       {
         inherit pkgs;
         directory = ./packages;
+
+        extras = { inherit llakaLib; }; # Lets the packages rely on llakaLib
       }
     );
 
-    devShells = llakaLib.forAllSystems
+    devShells = forAllSystems
     (
       pkgs:
       {
