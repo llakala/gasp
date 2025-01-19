@@ -1,5 +1,7 @@
 #!/usr/bin/env fish
 
+set FZF_DEFAULT_OPTS (fmbl)
+
 set DIRECTORY /etc/nixos
 
 function cleanup_state

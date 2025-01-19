@@ -1,4 +1,4 @@
-{ pkgs, hip, llakaLib, ... }:
+{ pkgs, llakaLib, hip, fmbl, ... }:
 
 let
   pkgsInputs = with pkgs;
@@ -11,6 +11,7 @@ let
   selfInputs = # Collected packages defined within repo
   [
     hip
+    fmbl
   ];
 
 in llakaLib.writeFishApplication
