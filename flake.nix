@@ -42,8 +42,10 @@
             ghp # Git Hire Patch
             gfp # Git Fire Patch
             gkp # Git Kill Patch
+
             splitpatch
             hip # For testing and QOL with running scripts
+            fmbl
           ];
         };
       }
