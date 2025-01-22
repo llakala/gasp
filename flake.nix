@@ -18,7 +18,7 @@
       (system: function nixpkgs.legacyPackages.${system});
   in
   {
-    packages = forAllSystems
+    legacyPackages = forAllSystems
     (
       pkgs: let llakaLib = inputs.llakaLib.fullLib.${pkgs.system}; # My custom lib functions
       in
@@ -37,7 +37,7 @@
       {
         default = pkgs.mkShell
         {
-          packages = with self.packages.${pkgs.system};
+          packages = with self.legacyPackages.${pkgs.system};
           [
             ghp # Git Hire Patch
             gfp # Git Fire Patch
