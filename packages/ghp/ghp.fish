@@ -9,8 +9,8 @@ function cleanup_state
 end
 
 # Currently unstaged changes
-# We do "$()" to not split into a list on newlines
-set diff "$(git -C $DIRECTORY diff)"
+# Use `string collect` to not split on newlines
+set diff (git -C $DIRECTORY diff | string collect)
 
 # Internal dependency from nix package inputs
 # Splits patch into hunks within $TMPDIR
