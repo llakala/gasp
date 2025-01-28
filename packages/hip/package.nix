@@ -1,12 +1,13 @@
-{ splitpatch, llakaLib, ... }:
+{ llakaLib, localPackages, ... }:
 
 llakaLib.writeFishApplication
 {
   name = "hip"; # `Hunks In Patch`
 
-  runtimeInputs =
+  # Other packages defined within repo
+  runtimeInputs = with localPackages;
   [
-    splitpatch # Collected packages defined within repo
+    splitpatch
   ];
 
   text = builtins.readFile ./hip.fish;

@@ -1,4 +1,4 @@
-{ pkgs, llakaLib, hip, fmbl, ... }:
+{ pkgs, llakaLib, localPackages, ... }:
 
 let
   pkgsInputs = with pkgs;
@@ -8,7 +8,8 @@ let
     diff-so-fancy
   ];
 
-  selfInputs = # Collected packages defined within repo
+  # Other packages defined within repo
+  selfInputs = with localPackages;
   [
     hip
     fmbl
