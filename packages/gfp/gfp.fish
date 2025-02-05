@@ -2,7 +2,17 @@
 
 set FZF_DEFAULT_OPTS (fmbl)
 
-set DIRECTORY /etc/nixos
+switch (count $argv)
+    case 0
+        set DIRECTORY /etc/nixos
+
+    case 1
+        set DIRECTORY $argv[1]
+
+    case '*'
+        echo "Error: Too many arguments passed"
+        exit 1
+end
 
 function cleanup_state
     rm -rf $TMPDIR
