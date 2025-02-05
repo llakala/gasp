@@ -4,10 +4,15 @@ set FZF_DEFAULT_OPTS (fmbl)
 
 switch (count $argv)
     case 0
-        set DIRECTORY /etc/nixos
+        set DIRECTORY (pwd -P)
 
     case 1
+        if [ $argv[1] = "." ]
+            echo "unable to understand passing a period!"
+            exit 1
+        end
         set DIRECTORY $argv[1]
+
 
     case '*'
         echo "Error: Too many arguments passed"
