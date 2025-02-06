@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1738025451,
-        "narHash": "sha256-6QC1cFv/l5+Fk3OpTQmhCZjr7KBBXFC0OVaWtwkSG7k=",
+        "lastModified": 1738440050,
+        "narHash": "sha256-hRLZ1ihnjIaAaQ4kAgQK1WnZl5qw7hMudeMhMSUF0Io=",
         "owner": "llakala",
         "repo": "llakaLib",
-        "rev": "5e74156e2b84bf2f8cafe3c9e9884ddeedb968c3",
+        "rev": "2512d32d7812b62d27d9a63017fa1e4c91214d90",
         "type": "github"
       },
       "original": {
@@ -22,15 +22,18 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1737569578,
-        "narHash": "sha256-6qY0pk2QmUtBT9Mywdvif0i/CLVgpCjMUn6g9vB+f3M=",
-        "path": "/nix/store/5kvd3cn4cld24l2cs07m4hw3hwlqq104-source",
-        "rev": "47addd76727f42d351590c905d9d1905ca895b82",
-        "type": "path"
+        "lastModified": 1738680400,
+        "narHash": "sha256-ooLh+XW8jfa+91F1nhf9OF7qhuA/y1ChLx6lXDNeY5U=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "799ba5bffed04ced7067a91798353d360788b30d",
+        "type": "github"
       },
       "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "root": {

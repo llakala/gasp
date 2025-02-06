@@ -1,8 +1,16 @@
 {
-  inputs.llakaLib =
+
+  inputs =
   {
-    url = "github:llakala/llakaLib";
-    inputs.nixpkgs.follows = "nixpkgs";
+    # If you want to use `follows`, make it follow your own unstable input
+    # for access to new FZF versions
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    llakaLib =
+    {
+      url = "github:llakala/llakaLib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, ... } @ inputs:
