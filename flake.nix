@@ -43,18 +43,13 @@
     (
       pkgs:
       {
-        default = pkgs.mkShell
+        default = pkgs.mkShellNoCC
         {
-          packages = with self.legacyPackages.${pkgs.system};
-          [
-            ghp # Git Hire Patch
-            gfp # Git Fire Patch
-            gkp # Git Kill Patch
+          # Grab all packages provided by the flake. We expect there
+          # won't be any subattrs. If they ever existed, we'd have to use
+          # something recursive, but I hope they won't.
+          packages = builtins.attrValues self.legacyPackages.${pkgs.system};
 
-            splitpatch
-            hip # For testing and QOL with running scripts
-            fmbl
-          ];
         };
       }
     );
