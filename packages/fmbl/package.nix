@@ -10,6 +10,7 @@ llakaLib.writeFishApplication
   ''
     set -l options_list \
       "--border --cycle --exact --highlight-line --inline-info --multi --no-separator --reverse --ansi" \
+      "--preview-window '75%'" \
       "--bind j:down --bind k:up" \
       "--bind 'esc:change-header(NORMAL MODE)+rebind(i,j,k)'" \
       "--bind 'i:change-header(INSERT MODE)+unbind(i,j,k)'" \
