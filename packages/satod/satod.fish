@@ -22,21 +22,29 @@ end
 
 switch $TYPE
     case hire
+        # Unstaged diff
         set ORIGINAL_DIFF (git -C $DIRECTORY diff | string collect)
+
+        # Apply the given patch to the staged changes, staging it
         function apply_diff -a tmpdir patch
             cat "$tmpdir/$patch" | git apply --cached -
         end
 
     case fire
-        set ORIGINAL_DIFF (git -C $DIRECTORY diff --staged -R | string collect)
+        # Staged diff
+        set ORIGINAL_DIFF (git -C $DIRECTORY diff --staged | string collect)
+
+        # Unapply the given patch to the staged changes, unstaging it
         function apply_diff -a tmpdir patch
-            cat "$tmpdir/$patch" | git apply --cached -
+            cat "$tmpdir/$patch" | git apply --cached -R -
         end
 
     case kill
+        # Unstaged diff
         set ORIGINAL_DIFF (git -C $DIRECTORY diff | string collect)
+
+        # Unapply the given patch from the unstaged changes, getting rid of it
         function apply_diff -a tmpdir patch
-            # Unstage the given patch thanks to -R
             cat "$tmpdir/$patch" | git apply -R -
         end
 
