@@ -3,14 +3,9 @@
     # If you want to use `follows`, make it follow your own unstable input
     # for access to new FZF versions
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    llakaLib = {
-      url = "github:llakala/llakaLib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, ... } @ inputs:
+  outputs = { self, nixpkgs, ... }:
   let
     lib = nixpkgs.lib;
 
@@ -22,14 +17,7 @@
       supportedSystems
       (system: function nixpkgs.legacyPackages.${system});
   in {
-    legacyPackages = forAllSystems (pkgs:
-      let
-        llakaLib = inputs.llakaLib.fullLib.${pkgs.system}; # My custom lib functions
-      in llakaLib.collectDirectoryPackages {
-        inherit pkgs;
-        directory = ./packages;
-      }
-    );
+    legacyPackages = forAllSystems (pkgs: import ./packages/default.nix { inherit pkgs; });
 
     devShells = forAllSystems (pkgs: {
       default = pkgs.mkShellNoCC {
