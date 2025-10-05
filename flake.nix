@@ -28,17 +28,19 @@
       in llakaLib.collectDirectoryPackages {
         inherit pkgs;
         directory = ./packages;
-
-        extras = { inherit llakaLib; }; # Lets the packages rely on llakaLib
       }
     );
 
     devShells = forAllSystems (pkgs: {
       default = pkgs.mkShellNoCC {
-        # Grab all packages provided by the flake. We expect there
-        # won't be any subattrs. If they ever existed, we'd have to use
-        # something recursive, but I hope they won't.
-        packages = builtins.attrValues self.legacyPackages.${pkgs.system};
+        packages = with self.legacyPackages.${pkgs.system}; [
+          ghp
+          gfp
+          gkp
+          fmbl
+          satod
+          splitpatch
+        ];
       };
     });
   };
