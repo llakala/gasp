@@ -1,20 +1,12 @@
 { pkgs, localPackages }:
 
-let
-  pkgsInputs = with pkgs; [
-    git
-    fzf
-    diff-so-fancy
-  ];
-
-  # Other packages defined within repo
-  selfInputs = with localPackages; [
-    fmbl
-    splitpatch
-  ];
-
-in localPackages.writeFishApplication {
+localPackages.writeFishApplication {
   name = "satod"; # Split a Type of Diff
-  runtimeInputs = pkgsInputs ++ selfInputs;
+
+  runtimeInputs = builtins.attrValues {
+    inherit (pkgs) git fzf diff-so-fancy;
+    inherit (localPackages) fmbl splitpatch;
+  };
+
   text = builtins.readFile ./satod.fish;
 }
