@@ -1,13 +1,10 @@
 { llakaLib, ... }:
 
 
-llakaLib.writeFishApplication
-{
+llakaLib.writeFishApplication {
   name = "fmbl"; # `Fzf Modal Bind Life`
 
-  text =
-  /* fish */
-  ''
+  text = /* fish */ ''
     set -l options_list \
       "--border --cycle --exact --highlight-line --inline-info --multi --no-separator --reverse --ansi" \
       "--preview-window '75%'" \

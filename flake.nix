@@ -1,13 +1,10 @@
 {
-
-  inputs =
-  {
+  inputs = {
     # If you want to use `follows`, make it follow your own unstable input
     # for access to new FZF versions
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    llakaLib =
-    {
+    llakaLib = {
       url = "github:llakala/llakaLib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -24,14 +21,11 @@
     forAllSystems = function: lib.genAttrs
       supportedSystems
       (system: function nixpkgs.legacyPackages.${system});
-  in
-  {
-    legacyPackages = forAllSystems
-    (
-      pkgs: let llakaLib = inputs.llakaLib.fullLib.${pkgs.system}; # My custom lib functions
-      in
-        llakaLib.collectDirectoryPackages
-      {
+  in {
+    legacyPackages = forAllSystems (pkgs:
+      let
+        llakaLib = inputs.llakaLib.fullLib.${pkgs.system}; # My custom lib functions
+      in llakaLib.collectDirectoryPackages {
         inherit pkgs;
         directory = ./packages;
 
@@ -39,21 +33,13 @@
       }
     );
 
-    devShells = forAllSystems
-    (
-      pkgs:
-      {
-        default = pkgs.mkShellNoCC
-        {
-          # Grab all packages provided by the flake. We expect there
-          # won't be any subattrs. If they ever existed, we'd have to use
-          # something recursive, but I hope they won't.
-          packages = builtins.attrValues self.legacyPackages.${pkgs.system};
-
-        };
-      }
-    );
-
-
+    devShells = forAllSystems (pkgs: {
+      default = pkgs.mkShellNoCC {
+        # Grab all packages provided by the flake. We expect there
+        # won't be any subattrs. If they ever existed, we'd have to use
+        # something recursive, but I hope they won't.
+        packages = builtins.attrValues self.legacyPackages.${pkgs.system};
+      };
+    });
   };
 }
