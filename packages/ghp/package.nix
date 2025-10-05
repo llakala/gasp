@@ -1,4 +1,4 @@
-{ llakaLib, localPackages, ... }:
+{ llakaLib, localPackages }:
 
 llakaLib.writeFishApplication {
   name = "ghp"; # `Git Hire Patch`

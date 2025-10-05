@@ -1,4 +1,4 @@
-{ pkgs, llakaLib, localPackages, ... }:
+{ pkgs, llakaLib, localPackages }:
 
 let
   pkgsInputs = with pkgs; [

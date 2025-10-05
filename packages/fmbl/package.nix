@@ -1,4 +1,4 @@
-{ llakaLib, ... }:
+{ llakaLib }:
 
 
 llakaLib.writeFishApplication {

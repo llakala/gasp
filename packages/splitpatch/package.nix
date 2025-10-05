@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, pkgs, ... }:
+{ stdenv, fetchFromGitHub, pkgs }:
 
 stdenv.mkDerivation {
   pname = "splitpatch";

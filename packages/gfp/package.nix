@@ -1,4 +1,4 @@
-{ llakaLib, localPackages, ... }:
+{ llakaLib, localPackages }:
 
 llakaLib.writeFishApplication {
   name = "gfp"; # `Git Fire Patch`
