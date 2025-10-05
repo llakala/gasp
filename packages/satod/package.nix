@@ -1,4 +1,4 @@
-{ pkgs, llakaLib, localPackages }:
+{ pkgs, localPackages }:
 
 let
   pkgsInputs = with pkgs; [
@@ -13,7 +13,7 @@ let
     splitpatch
   ];
 
-in llakaLib.writeFishApplication {
+in localPackages.writeFishApplication {
   name = "satod"; # Split a Type of Diff
   runtimeInputs = pkgsInputs ++ selfInputs;
   text = builtins.readFile ./satod.fish;

@@ -1,7 +1,7 @@
-{ llakaLib }:
+{ localPackages }:
 
 
-llakaLib.writeFishApplication {
+localPackages.writeFishApplication {
   name = "fmbl"; # `Fzf Modal Bind Life`
 
   text = /* fish */ ''

@@ -1,6 +1,6 @@
-{ llakaLib, localPackages }:
+{ localPackages }:
 
-llakaLib.writeFishApplication {
+localPackages.writeFishApplication {
   name = "gkp"; # `Git Kill Patch`
 
   runtimeInputs = [
