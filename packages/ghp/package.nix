@@ -1,11 +1,9 @@
 { llakaLib, localPackages, ... }:
 
-llakaLib.writeFishApplication
-{
+llakaLib.writeFishApplication {
   name = "ghp"; # `Git Hire Patch`
 
-  runtimeInputs =
-  [
+  runtimeInputs = [
     localPackages.satod
   ];
 
