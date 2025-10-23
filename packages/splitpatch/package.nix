@@ -4,13 +4,13 @@ stdenv.mkDerivation {
   pname = "splitpatch";
 
   # TODO: bump to latest version
-  version = "TEST";
+  version = "0-unstable-2025-03-04";
 
   src = fetchFromGitHub {
     owner = "jaalto";
     repo = "splitpatch";
-    rev = "256cb7b5beab2234395096617593d63025f443e0";
-    hash = "sha256-Li4vjov+w7S7uxrGYRrRq7+p4LqM9Bhk6HVx4MBFMzI=";
+    rev = "d35dbf194a112ab8b8408d5f27ba5373be4c4a53";
+    hash = "sha256-4nMykkDhNQBITq5rgRlj20W/S5B2Fy3pUXXJ9wA/kTQ=";
   };
 
   buildInputs = with pkgs; [
@@ -18,10 +18,12 @@ stdenv.mkDerivation {
     ruby
   ];
 
-  prePatch = ''
-    substituteInPlace Makefile \
-      --replace /usr/bin/install "install" \
+  preInstall = ''
+    mkdir -p $out/share/man
   '';
 
-  makeFlags = [ "PREFIX=$(out)" ];
+  makeFlags = [
+    "INSTALL_MKDIR=mkdir"
+    "PREFIX=$(out)"
+  ];
 }
