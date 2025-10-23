@@ -9,10 +9,6 @@ let
     satod = callPackage ./satod/package.nix {};
     splitpatch = callPackage ./splitpatch/package.nix {};
     writeFishApplication = callPackage ./writeFishApplication/package.nix {};
-
-    ghp = callPackage ./ghp/package.nix {};
-    gfp = callPackage ./gfp/package.nix {};
-    gkp = callPackage ./gkp/package.nix {};
   };
 
 in packages

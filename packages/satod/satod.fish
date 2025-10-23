@@ -1,19 +1,15 @@
 #!/usr/bin/env fish
 
 set FZF_DEFAULT_OPTS (fmbl)
+set DIRECTORY (pwd -P)
 
 switch (count $argv)
-    case 0 1
+    case 0
         echo "Not enough arguments passed!"
         exit 1
 
-    case 2
-        if [ $argv[1] = "." ]
-            echo "unable to understand passing a period for the directory!"
-            exit 1
-        end
-        set DIRECTORY $argv[1]
-        set TYPE $argv[2]
+    case 1
+        set TYPE $argv[1]
 
     case '*'
         echo "Error: Too many arguments passed"
