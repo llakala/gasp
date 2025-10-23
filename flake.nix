@@ -16,7 +16,6 @@
     devShells = forAllSystems (pkgs: {
       default = pkgs.mkShellNoCC {
         packages = with self.legacyPackages.${pkgs.system}; [
-          fmbl
           satod
           splitpatch
         ];

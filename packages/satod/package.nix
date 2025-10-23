@@ -5,7 +5,7 @@ localPackages.writeFishApplication {
 
   runtimeInputs = builtins.attrValues {
     inherit (pkgs) git fzf diff-so-fancy;
-    inherit (localPackages) fmbl splitpatch;
+    inherit (localPackages) splitpatch;
   };
 
   text = builtins.readFile ./satod.fish;

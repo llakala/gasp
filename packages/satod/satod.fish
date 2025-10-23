@@ -1,6 +1,12 @@
 #!/usr/bin/env fish
 
-set FZF_DEFAULT_OPTS (fmbl)
+set FZF_DEFAULT_OPTS \
+    --border --cycle --exact --highlight-line --multi --no-separator --reverse --ansi --preview-window='75%' \
+    --bind='j:down,k:up,f:jump-accept' \
+    "--bind='i:show-input+unbind(i,j,k,f)'" \
+    "--bind='esc:hide-input+rebind(i,j,k,f)'" \
+    --bind='start:hide-input,ctrl-l:accept'
+
 set DIRECTORY (pwd -P)
 
 switch (count $argv)
