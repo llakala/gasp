@@ -1,10 +1,10 @@
-{ pkgs, localPackages }:
+{ git, fzf, diff-so-fancy, localPackages }:
 
 localPackages.writeFishApplication {
   name = "satod"; # Split a Type of Diff
 
   runtimeInputs = builtins.attrValues {
-    inherit (pkgs) git fzf diff-so-fancy;
+    inherit git fzf diff-so-fancy;
     inherit (localPackages) splitpatch;
   };
 
